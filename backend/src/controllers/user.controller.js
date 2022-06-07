@@ -27,10 +27,26 @@ router.post("/create", async (req, res) => {
 //for getting single user
 router.get("/:id", async (req, res) => {
   try {
-    const users = await User.findById(req.params.id).lean().exec();
-    res.status(200).send({ data: users, message: "success" });
+    const user = await User.findById(req.params.id).lean().exec();
+    res.status(200).send({ data: user, message: "success" });
   } catch (error) {
     console.log("error:", error);
     res.status(500).send({ data: [], message: "error" });
   }
 });
+
+//for update user by id
+router.patch("/:id/edit", async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+    })
+      .lean()
+      .exec();
+    res.status(200).send({ data: user, message: "success" });
+  } catch (error) {
+    console.log("error:", error);
+    res.status(500).send({ data: [], message: "error" });
+  }
+});
+
