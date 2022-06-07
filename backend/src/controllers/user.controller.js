@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 //for creating user
 router.post("/create", async (req, res) => {
   try {
-    const user = await User.create(req, body);
+    const user = await User.create(req.body);
     return res.status(201).send({ data: user, message: "success" });
   } catch (error) {
     console.log("error:", error);
@@ -86,3 +86,5 @@ router.patch("/:id/addresses/:id/edit", async (req, res) => {
     res.status(500).send({ data: [], message: "error" });
   }
 });
+
+module.exports = router;
