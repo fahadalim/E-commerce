@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const userController = require("./controllers/user.controller");
+const brandController =  require("./controllers/user.controller")
+const productController =  require("./controllers/product.controller")
 
 const app = express();
 
@@ -12,5 +14,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", userController);
+app.use("/brands",brandController)
+app.use("/products",productController)
 
 module.exports = app;
